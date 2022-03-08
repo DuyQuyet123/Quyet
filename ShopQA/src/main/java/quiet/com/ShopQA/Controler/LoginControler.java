@@ -12,7 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import quiet.com.ShopQA.Repostory.UserRepository;
-import quiet.com.ShopQA.ServiceImpl.UserServiceImpl;
+import quiet.com.ShopQA.Service.UserService;
 
 @Controller
 public class LoginControler {
@@ -20,7 +20,7 @@ public class LoginControler {
 	@Autowired
 	UserRepository userRepository;
 	@Autowired
-	UserServiceImpl userServiceImpl;
+	UserService userService;
 
 	@GetMapping("/login")
 	public String Getlogin(HttpServletRequest request) {

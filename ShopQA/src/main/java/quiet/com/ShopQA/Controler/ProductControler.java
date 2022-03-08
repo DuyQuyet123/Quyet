@@ -19,28 +19,28 @@ import quiet.com.ShopQA.DTO.CategoryDTO;
 import quiet.com.ShopQA.DTO.ProductDTO;
 import quiet.com.ShopQA.DTO.SizeDTO;
 import quiet.com.ShopQA.DTO.TrademarkDTO;
-import quiet.com.ShopQA.ServiceImpl.CategoryServiceImpl;
-import quiet.com.ShopQA.ServiceImpl.ProductServiceImpl;
-import quiet.com.ShopQA.ServiceImpl.SizeServiceImpl;
-import quiet.com.ShopQA.ServiceImpl.TrademarkServiceimpl;
+import quiet.com.ShopQA.Service.CategoryService;
+import quiet.com.ShopQA.Service.ProductService;
+import quiet.com.ShopQA.Service.SizeService;
+import quiet.com.ShopQA.Service.TrademarkService;
 
 @Controller
 public class ProductControler {
 	@Autowired
-	private ProductServiceImpl productServiceImpl;
+	private ProductService productService;
 	@Autowired
-	private CategoryServiceImpl categoryServiceImpl;
+	private CategoryService categoryService;
 	@Autowired
-	private SizeServiceImpl sizeServiceImpl;
+	private SizeService sizeService;
 	@Autowired
-	private TrademarkServiceimpl trademarkServiceimpl;
+	private TrademarkService trademarkService;
 
 	@GetMapping("/admin/add-product")
 	public String addProductGet(HttpServletRequest request, Model model) {
 		model.addAttribute("product", new ProductDTO());
-		List<CategoryDTO> listCategoryDTOs = categoryServiceImpl.search();
-		List<SizeDTO> listSizeDTOs = sizeServiceImpl.search();
-		List<TrademarkDTO> trademarkDTOs = trademarkServiceimpl.search();
+		List<CategoryDTO> listCategoryDTOs = categoryService.search();
+		List<SizeDTO> listSizeDTOs = sizeService.search();
+		List<TrademarkDTO> trademarkDTOs = trademarkService.search();
 
 		request.setAttribute("listTrademark", trademarkDTOs);
 		request.setAttribute("listSize", listSizeDTOs);
@@ -64,16 +64,16 @@ public class ProductControler {
 				e.printStackTrace();
 			}
 		}
-		productServiceImpl.insert(productDTO);
+		productService.insert(productDTO);
 		return "redirect:/admin/search-product";
 	}
 
 	@GetMapping("/admin/update-product")
 	public String updateProductGet(HttpServletRequest request, Model model, @RequestParam(name = "id") Long id) {
-		ProductDTO productDTO = productServiceImpl.get(id);
-		List<CategoryDTO> listCategoryDTOs = categoryServiceImpl.search();
-		List<SizeDTO> listSizeDTOs = sizeServiceImpl.search();
-		List<TrademarkDTO> trademarkDTOs = trademarkServiceimpl.search();
+		ProductDTO productDTO = productService.get(id);
+		List<CategoryDTO> listCategoryDTOs = categoryService.search();
+		List<SizeDTO> listSizeDTOs = sizeService.search();
+		List<TrademarkDTO> trademarkDTOs = trademarkService.search();
 
 		model.addAttribute("productDTO", productDTO);
 		request.setAttribute("listTrademark", trademarkDTOs);
@@ -98,24 +98,24 @@ public class ProductControler {
 				e.printStackTrace();
 			}
 		}
-		productServiceImpl.update(productDTO);
+		productService.update(productDTO);
 		return "redirect:/admin/search-product";
 	}
 
 	@GetMapping("/admin/delete-product")
 	public String deleteProduct(@RequestParam(name = "id") Long id) {
-		productServiceImpl.delete(id);
+		productService.delete(id);
 		return "redirect:/admin/search-product";
 	}
 
 	@GetMapping("/admin/search-product")
 	public String searchProduct(HttpServletRequest request) {
 
-		List<ProductDTO> productDTOs = productServiceImpl.search();
+		List<ProductDTO> productDTOs = productService.search();
 
-		List<CategoryDTO> listCategoryDTOs = categoryServiceImpl.search();
-		List<SizeDTO> listSizeDTOs = sizeServiceImpl.search();
-		List<TrademarkDTO> trademarkDTOs = trademarkServiceimpl.search();
+		List<CategoryDTO> listCategoryDTOs = categoryService.search();
+		List<SizeDTO> listSizeDTOs = sizeService.search();
+		List<TrademarkDTO> trademarkDTOs = trademarkService.search();
 
 		request.setAttribute("TrademarkDTOs", trademarkDTOs);
 		request.setAttribute("SizeDTOs", listSizeDTOs);
@@ -128,9 +128,9 @@ public class ProductControler {
 	@GetMapping("/manager/add-product")
 	public String addProductGetManager(HttpServletRequest request, Model model) {
 		model.addAttribute("product", new ProductDTO());
-		List<CategoryDTO> listCategoryDTOs = categoryServiceImpl.search();
-		List<SizeDTO> listSizeDTOs = sizeServiceImpl.search();
-		List<TrademarkDTO> trademarkDTOs = trademarkServiceimpl.search();
+		List<CategoryDTO> listCategoryDTOs = categoryService.search();
+		List<SizeDTO> listSizeDTOs = sizeService.search();
+		List<TrademarkDTO> trademarkDTOs = trademarkService.search();
 
 		request.setAttribute("listTrademark", trademarkDTOs);
 		request.setAttribute("listSize", listSizeDTOs);
@@ -154,16 +154,16 @@ public class ProductControler {
 				e.printStackTrace();
 			}
 		}
-		productServiceImpl.insert(productDTO);
+		productService.insert(productDTO);
 		return "redirect:/manager/search-product";
 	}
 
 	@GetMapping("/manager/update-product")
 	public String updateProductGetManager(HttpServletRequest request, Model model, @RequestParam(name = "id") Long id) {
-		ProductDTO productDTO = productServiceImpl.get(id);
-		List<CategoryDTO> listCategoryDTOs = categoryServiceImpl.search();
-		List<SizeDTO> listSizeDTOs = sizeServiceImpl.search();
-		List<TrademarkDTO> trademarkDTOs = trademarkServiceimpl.search();
+		ProductDTO productDTO = productService.get(id);
+		List<CategoryDTO> listCategoryDTOs = categoryService.search();
+		List<SizeDTO> listSizeDTOs = sizeService.search();
+		List<TrademarkDTO> trademarkDTOs = trademarkService.search();
 
 		model.addAttribute("productDTO", productDTO);
 		request.setAttribute("listTrademark", trademarkDTOs);
@@ -188,24 +188,24 @@ public class ProductControler {
 				e.printStackTrace();
 			}
 		}
-		productServiceImpl.update(productDTO);
+		productService.update(productDTO);
 		return "redirect:/manager/search-product";
 	}
 
 	@GetMapping("/manager/delete-product")
 	public String deleteProductManager(@RequestParam(name = "id") Long id) {
-		productServiceImpl.delete(id);
+		productService.delete(id);
 		return "redirect:/admin/search-product";
 	}
 
 	@GetMapping("/manager/search-product")
 	public String searchProductManager(HttpServletRequest request) {
 
-		List<ProductDTO> productDTOs = productServiceImpl.search();
+		List<ProductDTO> productDTOs = productService.search();
 
-		List<CategoryDTO> listCategoryDTOs = categoryServiceImpl.search();
-		List<SizeDTO> listSizeDTOs = sizeServiceImpl.search();
-		List<TrademarkDTO> trademarkDTOs = trademarkServiceimpl.search();
+		List<CategoryDTO> listCategoryDTOs = categoryService.search();
+		List<SizeDTO> listSizeDTOs = sizeService.search();
+		List<TrademarkDTO> trademarkDTOs = trademarkService.search();
 
 		request.setAttribute("TrademarkDTOs", trademarkDTOs);
 		request.setAttribute("SizeDTOs", listSizeDTOs);

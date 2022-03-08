@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import quiet.com.ShopQA.DTO.SizeDTO;
-import quiet.com.ShopQA.ServiceImpl.SizeServiceImpl;
+import quiet.com.ShopQA.Service.SizeService;
 
 @Controller
 public class SizeControler {
 	@Autowired
-	private SizeServiceImpl sizeServiceImpl;
+	private SizeService sizeService;
 
 	@GetMapping("/admin/add-size")
 	public String addSizeGet() {
@@ -25,19 +25,19 @@ public class SizeControler {
 
 	@PostMapping("/admin/add-size")
 	public String addSizePost(@ModelAttribute(name = "addsize") SizeDTO sizeDTO) {
-		sizeServiceImpl.insert(sizeDTO);
+		sizeService.insert(sizeDTO);
 		return "redirect:/admin/search-size";
 	}
 
 	@PostMapping("/admin/size/add")
 	public String sizeAddPost(@ModelAttribute(name = "addsize") SizeDTO sizeDTO) {
-		sizeServiceImpl.insert(sizeDTO);
+		sizeService.insert(sizeDTO);
 		return "redirect:/admin/add-product";
 	}
 
 	@GetMapping("/admin/update-size")
 	public String updateSizeGet(Model model, @RequestParam(name = "id") Long id) {
-		SizeDTO sizeDTO = sizeServiceImpl.get(id);
+		SizeDTO sizeDTO = sizeService.get(id);
 		model.addAttribute("sizeDTO", sizeDTO);
 		return "admin/size/updatesize";
 	}
@@ -45,14 +45,14 @@ public class SizeControler {
 	@PostMapping("/admin/update-size")
 	public String updateSizePost(@ModelAttribute(name = "updateSize") SizeDTO sizeDTO) {
 
-		sizeServiceImpl.update(sizeDTO);
+		sizeService.update(sizeDTO);
 		return "redirect:/admin/search-size";
 
 	}
 
 	@GetMapping("/admin/delete-size")
 	public String deleteSize(Long id) {
-		sizeServiceImpl.delete(id);
+		sizeService.delete(id);
 		return "redirect:/admin/search-size";
 	}
 
@@ -61,7 +61,7 @@ public class SizeControler {
 	// , @RequestParam(name = "pageable",required = false) Pageable pageable
 	) {
 		// pageable= pageable == null ? PageRequest.of(0, 10): pageable;
-		List<SizeDTO> sizeDTOs = sizeServiceImpl.search();
+		List<SizeDTO> sizeDTOs = sizeService.search();
 		model.addAttribute("sizeDTOs", sizeDTOs);
 		// model.addAttribute("pageable",pageable);
 		return "admin/size/searchsize";
@@ -75,19 +75,19 @@ public class SizeControler {
 
 	@PostMapping("/manager/add-size")
 	public String addSizePostManager(@ModelAttribute(name = "addsize") SizeDTO sizeDTO) {
-		sizeServiceImpl.insert(sizeDTO);
+		sizeService.insert(sizeDTO);
 		return "redirect:/manager/search-size";
 	}
 
 	@PostMapping("/manager/size/add")
 	public String sizeAddPostManager(@ModelAttribute(name = "addsize") SizeDTO sizeDTO) {
-		sizeServiceImpl.insert(sizeDTO);
+		sizeService.insert(sizeDTO);
 		return "redirect:/manager/add-product";
 	}
 
 	@GetMapping("/manager/update-size")
 	public String updateSizeGetManager(Model model, @RequestParam(name = "id") Long id) {
-		SizeDTO sizeDTO = sizeServiceImpl.get(id);
+		SizeDTO sizeDTO = sizeService.get(id);
 		model.addAttribute("sizeDTO", sizeDTO);
 		return "manager/size/updatesize";
 	}
@@ -95,14 +95,14 @@ public class SizeControler {
 	@PostMapping("/manager/update-size")
 	public String updateSizePostManager(@ModelAttribute(name = "updateSize") SizeDTO sizeDTO) {
 
-		sizeServiceImpl.update(sizeDTO);
+		sizeService.update(sizeDTO);
 		return "redirect:/manager/search-size";
 
 	}
 
 	@GetMapping("/manager/delete-size")
 	public String deleteSizeManager(Long id) {
-		sizeServiceImpl.delete(id);
+		sizeService.delete(id);
 		return "redirect:/manager/search-size";
 	}
 
@@ -111,7 +111,7 @@ public class SizeControler {
 	// , @RequestParam(name = "pageable",required = false) Pageable pageable
 	) {
 		// pageable= pageable == null ? PageRequest.of(0, 10): pageable;
-		List<SizeDTO> sizeDTOs = sizeServiceImpl.search();
+		List<SizeDTO> sizeDTOs = sizeService.search();
 		model.addAttribute("sizeDTOs", sizeDTOs);
 		// model.addAttribute("pageable",pageable);
 		return "manager/size/searchsize";

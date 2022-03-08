@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import quiet.com.ShopQA.DTO.TrademarkDTO;
-import quiet.com.ShopQA.ServiceImpl.TrademarkServiceimpl;
+import quiet.com.ShopQA.Service.TrademarkService;
 
 @Controller
 public class TrademarkControler {
 	@Autowired
-	private TrademarkServiceimpl trademarkServiceimpl;
+	private TrademarkService trademarkService;
 
 	@GetMapping("/admin/add-trademark")
 	public String addTrademarkGet() {
@@ -25,19 +25,19 @@ public class TrademarkControler {
 
 	@PostMapping("/admin/add-trademark")
 	public String addTrademarkPost(@ModelAttribute(name = "addtrademark") TrademarkDTO trademarkDTO) {
-		trademarkServiceimpl.insert(trademarkDTO);
+		trademarkService.insert(trademarkDTO);
 		return "redirect:/admin/search-trademark";
 	}
 
 	@PostMapping("/admin/trademark/add")
 	public String trademarkAddPost(@ModelAttribute(name = "addtrademark") TrademarkDTO trademarkDTO) {
-		trademarkServiceimpl.insert(trademarkDTO);
+		trademarkService.insert(trademarkDTO);
 		return "redirect:/admin/add-product";
 	}
 
 	@GetMapping("/admin/update-trademark")
 	public String updateTrademarkGet(Model model, @RequestParam(name = "id") Long id) {
-		TrademarkDTO trademarkDTO = trademarkServiceimpl.get(id);
+		TrademarkDTO trademarkDTO = trademarkService.get(id);
 		model.addAttribute("trademark", trademarkDTO);
 		return "admin/trademark/updatetrademark";
 
@@ -45,13 +45,13 @@ public class TrademarkControler {
 
 	@PostMapping("/admin/update-trademark")
 	public String updateTrademarkPost(@ModelAttribute(name = "updateTrademark") TrademarkDTO trademarkDTO) {
-		trademarkServiceimpl.update(trademarkDTO);
+		trademarkService.update(trademarkDTO);
 		return "redirect:/admin/search-trademark";
 	}
 
 	@GetMapping("/admin/delete-trademark")
 	public String deleteTrademark(Long id) {
-		trademarkServiceimpl.delete(id);
+		trademarkService.delete(id);
 		return "redirect:/admin/search-trademark";
 	}
 
@@ -60,7 +60,7 @@ public class TrademarkControler {
 	// ,@RequestParam(name = "pageable",required = false) Pageable pageable
 	) {
 		// pageable= pageable == null ? PageRequest.of(0, 10): pageable;
-		List<TrademarkDTO> listTrademarkDTOs = trademarkServiceimpl.search();
+		List<TrademarkDTO> listTrademarkDTOs = trademarkService.search();
 		model.addAttribute("listTr", listTrademarkDTOs);
 		// model.addAttribute("pageable",pageable);
 		return "admin/trademark/searchtrademark";
@@ -75,19 +75,19 @@ public class TrademarkControler {
 
 	@PostMapping("/manager/add-trademark")
 	public String addTrademarkPostManager(@ModelAttribute(name = "addtrademark") TrademarkDTO trademarkDTO) {
-		trademarkServiceimpl.insert(trademarkDTO);
+		trademarkService.insert(trademarkDTO);
 		return "redirect:/manager/search-trademark";
 	}
 
 	@PostMapping("/manager/trademark/add")
 	public String trademarkAddPostManager(@ModelAttribute(name = "addtrademark") TrademarkDTO trademarkDTO) {
-		trademarkServiceimpl.insert(trademarkDTO);
+		trademarkService.insert(trademarkDTO);
 		return "redirect:/manager/add-product";
 	}
 
 	@GetMapping("/manager/update-trademark")
 	public String updateTrademarkGetManager(Model model, @RequestParam(name = "id") Long id) {
-		TrademarkDTO trademarkDTO = trademarkServiceimpl.get(id);
+		TrademarkDTO trademarkDTO = trademarkService.get(id);
 		model.addAttribute("trademark", trademarkDTO);
 		return "manager/trademark/updatetrademark";
 
@@ -95,13 +95,13 @@ public class TrademarkControler {
 
 	@PostMapping("/manager/update-trademark")
 	public String updateTrademarkPostManager(@ModelAttribute(name = "updateTrademark") TrademarkDTO trademarkDTO) {
-		trademarkServiceimpl.update(trademarkDTO);
+		trademarkService.update(trademarkDTO);
 		return "redirect:/manager/search-trademark";
 	}
 
 	@GetMapping("/manager/delete-trademark")
 	public String deleteTrademarkManager(Long id) {
-		trademarkServiceimpl.delete(id);
+		trademarkService.delete(id);
 		return "redirect:/manager/search-trademark";
 	}
 
@@ -110,7 +110,7 @@ public class TrademarkControler {
 	// ,@RequestParam(name = "pageable",required = false) Pageable pageable
 	) {
 		// pageable= pageable == null ? PageRequest.of(0, 10): pageable;
-		List<TrademarkDTO> listTrademarkDTOs = trademarkServiceimpl.search();
+		List<TrademarkDTO> listTrademarkDTOs = trademarkService.search();
 		model.addAttribute("listTr", listTrademarkDTOs);
 		// model.addAttribute("pageable",pageable);
 		return "manager/trademark/searchtrademark";

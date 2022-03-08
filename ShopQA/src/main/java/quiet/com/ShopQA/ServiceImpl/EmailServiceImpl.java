@@ -64,7 +64,6 @@ public class EmailServiceImpl implements EmailService {
 			helper.setText(html, true);
 			helper.setTo(to);
 			helper.setSubject(subject);
-
 			emailSender.send(message);
 		} catch (Exception ex) {
 			logger.error("Email sending ex: " + ex);

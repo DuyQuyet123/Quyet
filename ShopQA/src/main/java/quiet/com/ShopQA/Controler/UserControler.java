@@ -11,12 +11,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import quiet.com.ShopQA.DTO.UserDTO;
+import quiet.com.ShopQA.Service.UserService;
 import quiet.com.ShopQA.ServiceImpl.UserServiceImpl;
 
 @Controller
 public class UserControler {
 	@Autowired
-	private UserServiceImpl userServiceImpl;
+	private UserService userService;
 
 	@GetMapping("/admin/add-user")
 	public String addUserGet() {
@@ -27,13 +28,13 @@ public class UserControler {
 	@PostMapping("/admin/add-user")
 	public String addUserPost(@ModelAttribute(name = "adduser") UserDTO userDTO) {
 		userDTO.setEnabled(true);
-		userServiceImpl.insert(userDTO);
+		userService.insert(userDTO);
 		return "redirect:/admin/search-user";
 	}
 
 	@GetMapping("/admin/update-user")
 	public String updateUserGet(Model model, @RequestParam(name = "id") Long id) {
-		UserDTO userDTO = userServiceImpl.get(id);
+		UserDTO userDTO = userService.get(id);
 		model.addAttribute("userDTO", userDTO);
 		return "admin/user/updateuser";
 	}
@@ -41,13 +42,13 @@ public class UserControler {
 	@PostMapping("/admin/update-user")
 	public String updateUserPost(@ModelAttribute(name = "user") UserDTO userDTO) {
 		userDTO.setEnabled(true);
-		userServiceImpl.update(userDTO);
+		userService.update(userDTO);
 		return "redirect:/admin/search-user";
 	}
 
 	@GetMapping("/admin/delete-user")
 	public String deleteUser(Long id) {
-		userServiceImpl.delete(id);
+		userService.delete(id);
 		return "redirect:/admin/search-user";
 	}
 
@@ -59,7 +60,7 @@ public class UserControler {
 		// pageable= pageable == null ? PageRequest.of(0, 10): pageable;
 		// name = name == null ? "" : name;
 
-		List<UserDTO> list = userServiceImpl.search1();
+		List<UserDTO> list = userService.search1();
 		model.addAttribute("list", list);
 		// model.addAttribute("page", pageable);
 		// model.addAttribute("keyword", name);

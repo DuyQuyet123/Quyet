@@ -25,9 +25,13 @@ import quiet.com.ShopQA.DTO.SizeDTO;
 import quiet.com.ShopQA.DTO.TrademarkDTO;
 import quiet.com.ShopQA.DTO.UserDTO;
 import quiet.com.ShopQA.Repostory.UserRepository;
+import quiet.com.ShopQA.Service.CategoryService;
 import quiet.com.ShopQA.Service.CommentService;
 import quiet.com.ShopQA.Service.ProductService;
 import quiet.com.ShopQA.Service.ReviewService;
+import quiet.com.ShopQA.Service.SizeService;
+import quiet.com.ShopQA.Service.TrademarkService;
+import quiet.com.ShopQA.Service.UserService;
 import quiet.com.ShopQA.ServiceImpl.CategoryServiceImpl;
 import quiet.com.ShopQA.ServiceImpl.ProductServiceImpl;
 import quiet.com.ShopQA.ServiceImpl.SizeServiceImpl;
@@ -38,16 +42,15 @@ import quiet.com.ShopQA.ServiceImpl.UserServiceImpl;
 public class ClientControler {
 	@Autowired
     UserRepository userRepository;
+
 	@Autowired
-	private ProductServiceImpl productServiceImpl;
+	private CategoryService categoryService;
 	@Autowired
-	private CategoryServiceImpl categoryServiceImpl;
+	private SizeService sizeService;
 	@Autowired
-	private SizeServiceImpl sizeServiceImpl;
+	private TrademarkService trademarkService;
 	@Autowired
-	private TrademarkServiceimpl trademarkServiceimpl;
-	@Autowired
-	private UserServiceImpl userServiceImpl;
+	private UserService userService;
 	@Autowired
 	private CommentService commentService;
 	@Autowired
@@ -64,7 +67,7 @@ public class ClientControler {
 	public String addUserPost(@ModelAttribute(name = "adduser") UserDTO userDTO) {
 		userDTO.setEnabled(true);
 		userDTO.setGioiTinh("Nam");
-		userServiceImpl.insert(userDTO);
+		userService.insert(userDTO);
 		System.out.println(userDTO.getUsername());
 		return"redirect:/login";
 	}
@@ -72,14 +75,14 @@ public class ClientControler {
 	@GetMapping("/home")
 	public String home(HttpServletRequest request,@RequestParam(value = "pageable", required = false) Pageable pageable) {
 		pageable= pageable == null ? PageRequest.of(0, 8): pageable;
-	List<ProductDTO> productDTOs = productServiceImpl.search1(PageRequest.of(0, 8));
+	List<ProductDTO> productDTOs = productService.search1(PageRequest.of(0, 8));
 	
 	List<ProductDTO> productDTOs2 = productService.search2(0);
 	//int index = (int) productDTOs.size()/8;
 	//pageable= pageable == null ? PageRequest.of(index, 8): pageable;
-	List<CategoryDTO> categoryDTOs = categoryServiceImpl.search();
-	List<SizeDTO> sizeSTOs = sizeServiceImpl.search();
-	List<TrademarkDTO> trademarkDTOs = trademarkServiceimpl.search();
+	List<CategoryDTO> categoryDTOs = categoryService.search();
+	List<SizeDTO> sizeSTOs = sizeService.search();
+	List<TrademarkDTO> trademarkDTOs = trademarkService.search();
 	request.setAttribute("product2", productDTOs2);
 	request.setAttribute("trademarkList", trademarkDTOs);
 	request.setAttribute("sizeList", sizeSTOs);
@@ -96,11 +99,11 @@ public class ClientControler {
 				: request.getParameter("name");
 	int p =0;
 	List<ProductDTO> listProductDTOs = productService.searchbyProduct(name, p);
-	List<ProductDTO> productDTOs = productServiceImpl.search2(pageable);
+	List<ProductDTO> productDTOs = productService.search2(pageable);
 	
-	List<CategoryDTO> categoryDTOs = categoryServiceImpl.search();
-	List<SizeDTO> sizeSTOs = sizeServiceImpl.search();
-	List<TrademarkDTO> trademarkDTOs = trademarkServiceimpl.search();
+	List<CategoryDTO> categoryDTOs = categoryService.search();
+	List<SizeDTO> sizeSTOs = sizeService.search();
+	List<TrademarkDTO> trademarkDTOs = trademarkService.search();
 	
 	request.setAttribute("trademarkList", trademarkDTOs);
 	request.setAttribute("sizeList", sizeSTOs);
@@ -119,9 +122,9 @@ public class ClientControler {
 	List<ProductDTO> productDTOs = productService.searchbyProduct(name, p);
 	
 	
-	List<CategoryDTO> categoryDTOs = categoryServiceImpl.search();
-	List<SizeDTO> sizeSTOs = sizeServiceImpl.search();
-	List<TrademarkDTO> trademarkDTOs = trademarkServiceimpl.search();
+	List<CategoryDTO> categoryDTOs = categoryService.search();
+	List<SizeDTO> sizeSTOs = sizeService.search();
+	List<TrademarkDTO> trademarkDTOs = trademarkService.search();
 	
 	request.setAttribute("trademarkList", trademarkDTOs);
 	request.setAttribute("sizeList", sizeSTOs);
@@ -139,9 +142,9 @@ public class ClientControler {
 	pageable= pageable == null ? PageRequest.of(0, 8): pageable;
 	int p=0;
 	List<ProductDTO> productDTOs = productService.searchByCategory(name, pageable);
-	List<CategoryDTO> categoryDTOs = categoryServiceImpl.search();
-	List<SizeDTO> sizeSTOs = sizeServiceImpl.search();
-	List<TrademarkDTO> trademarkDTOs = trademarkServiceimpl.search();
+	List<CategoryDTO> categoryDTOs = categoryService.search();
+	List<SizeDTO> sizeSTOs = sizeService.search();
+	List<TrademarkDTO> trademarkDTOs = trademarkService.search();
 	
 	
 	request.setAttribute("trademarkList", trademarkDTOs);
@@ -156,10 +159,10 @@ public class ClientControler {
 	public String oneProduct(HttpServletRequest request,@RequestParam(name = "id")Long id,
 			@RequestParam(value = "pageable", required = false) Pageable pageable) {
 		pageable= pageable == null ? PageRequest.of(0, 4): pageable;
-		ProductDTO productDTO = productServiceImpl.get(id);
+		ProductDTO productDTO = productService.get(id);
 		List<CommentDTO> commentDTOs = commentService.searchByProduct(id);
 		List<ReviewDTO> reviewDTOs = reviewService.find(id);
-		List<SizeDTO> sizeDTOs = sizeServiceImpl.search();
+		List<SizeDTO> sizeDTOs = sizeService.search();
 		
 		float sum=0;
 		for(ReviewDTO reviewDTO:reviewDTOs) {
@@ -170,7 +173,7 @@ public class ClientControler {
 		float totalStar= sum/dem;
 		request.setAttribute("dem", dem);
 		request.setAttribute("totalStar", totalStar);
-		List<ProductDTO> productDTOs = productServiceImpl.search1(pageable);
+		List<ProductDTO> productDTOs = productService.search1(pageable);
 		request.setAttribute("product", productDTO);
 		request.setAttribute("listProduct", productDTOs);
 		request.setAttribute("listSize", sizeDTOs);
@@ -200,7 +203,7 @@ public class ClientControler {
 	public String AddtoCart(@RequestParam(name = "id")Long id,
 			//@RequestParam(name = "quantity")int quantity,
 			HttpSession session){
-		ProductDTO productDTO = productServiceImpl.get(id);
+		ProductDTO productDTO = productService.get(id);
 		Object obj = session.getAttribute("cart");//lấy ss
 		if(obj==null) {
 			BillProductDTO billProductDTO = new BillProductDTO();
