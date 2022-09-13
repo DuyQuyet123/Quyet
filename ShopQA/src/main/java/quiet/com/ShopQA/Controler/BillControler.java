@@ -1,8 +1,13 @@
 package quiet.com.ShopQA.Controler;
 
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import quiet.com.ShopQA.DTO.BillDTO;
 import quiet.com.ShopQA.DTO.BillProductDTO;
+import quiet.com.ShopQA.Export.BillExcelExport;
 import quiet.com.ShopQA.Service.BillProductService;
 import quiet.com.ShopQA.Service.BillService;
 
@@ -79,6 +85,23 @@ public class BillControler {
 		billService.update1(billDTO);
 
 		return "redirect:/admin/search-billproduct?id=" + billId;
+	}
+
+	@GetMapping("/admin/export/excel/bill")
+	public void exportToExcel(HttpServletResponse response) throws IOException {
+		response.setContentType("application/octet-stream");
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+		String currentDateTime = dateFormatter.format(new Date());
+
+		String headerKey = "Content-Disposition";
+		String headerValue = "attachment; filename=bill_" + currentDateTime + ".xlsx";
+		response.setHeader(headerKey, headerValue);
+
+		List<BillDTO> billDTOs = billService.search();
+
+		BillExcelExport excelExporter = new BillExcelExport(billDTOs);
+
+		excelExporter.export(response);
 	}
 
 	// Manager

@@ -1,55 +1,62 @@
-package quiet.com.ShopQA.Api;
+package quiet.com.ShopQA.api;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import quiet.com.ShopQA.DTO.CategoryDTO;
+import quiet.com.ShopQA.DTO.DataGetInfo;
+import quiet.com.ShopQA.Service.CategoryService;
+import quiet.com.ShopQA.ServiceImpl.factory.GetDataInfoFactory;
+import quiet.com.ShopQA.ServiceImpl.factory.ResponseFactory;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
-import quiet.com.ShopQA.DTO.CategoryDTO;
-import quiet.com.ShopQA.Service.CategoryService;
-
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1/categorys")
+@Api(tags = "Category V1", description = "Cấu hình Category")
 public class CategoryApiController {
-	@Autowired
-	private CategoryService categoryService;
-	
-	@PostMapping("/category/add")
-	public CategoryDTO categoryAdd(@RequestBody CategoryDTO categoryDTO) {
-		categoryService.insert(categoryDTO);
-		return categoryDTO;
-	}
-	@PutMapping("/category/update")
-	@ResponseStatus()
-	public void categoryUpdate(@RequestBody CategoryDTO categoryDTO) {
-		categoryService.update(categoryDTO);
-		
-	}
-	@DeleteMapping(value = "/category/delete")
-	public void delete(@RequestParam(name = "id") Long id) {
-		categoryService.delete(id);
-	}
-	
-	@GetMapping(value = "/category/{id}")
-	public CategoryDTO get(@PathVariable(name = "id") Long id) {
-		return categoryService.get(id);
-	}
-	
-	@GetMapping("/category/search")
-	public List<CategoryDTO> searchCategory() {
-		
-		List<CategoryDTO> categoryDTOs = categoryService.search();
 
-		return categoryDTOs;
-	}
-	
+    @Autowired
+    private CategoryService categoryService;
+
+    @Autowired
+    private ResponseFactory factory;
+
+    @Autowired
+    private GetDataInfoFactory dataInfoFactory;
+
+    @ApiOperation(value = "Create new Category")
+    @PostMapping
+    public CategoryDTO categoryAdd(@RequestBody CategoryDTO categoryDTO) {
+        categoryService.insert(categoryDTO);
+        return categoryDTO;
+    }
+
+    @ApiOperation(value = "Update Category")
+    @PutMapping
+    public void categoryUpdate(@RequestBody CategoryDTO categoryDTO) {
+        categoryService.update(categoryDTO);
+
+    }
+    @ApiOperation(value = "Delete Category")
+    @DeleteMapping("{id}")
+    public void delete(@PathVariable(name = "id") Long id) {
+        categoryService.delete(id);
+    }
+
+    @ApiOperation(value = "Get Info Category")
+    @GetMapping(value = "{id}")
+    public DataGetInfo<CategoryDTO> get(@PathVariable(name = "id") Long id) {
+
+        return dataInfoFactory.mapDataResponse(categoryService.get(id));
+    }
+
+    @ApiOperation(value = "Get All Category")
+    @GetMapping
+    public List<CategoryDTO> searchCategory() {
+        List<CategoryDTO> categoryDTOs = categoryService.search();
+        return categoryDTOs;
+    }
+
 }

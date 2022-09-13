@@ -22,84 +22,88 @@
 </head>
 
 <body>
-    <div class="limiter">
-        <div class="container-login100">
-            <div class="wrap-login100">
-                <div class="login100-pic js-tilt" data-tilt>
-                    <img th:src="@{/loginmem/images/team.jpg}" alt="IMG">
-                </div>
-                <!--=====TIÊU ĐỀ======-->
-                <form th:action="@{/login}" method="post" class="login100-form validate-form">
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <div class="login100-pic js-tilt" data-tilt>
+                <img th:src="@{/loginmem/images/team.jpg}" alt="IMG">
+            </div>
+            <!--=====TIÊU ĐỀ======-->
+            <form th:action="@{/login}" method="post" class="login100-form validate-form">
                     <span class="login100-form-title">
                         <b>ĐĂNG NHẬP SHOP QA</b>
                     </span>
-                    <!--=====FORM INPUT TÀI KHOẢN VÀ PASSWORD======-->
-                    <form action="">
-                        <div class="wrap-input100 validate-input">
-                            <input class="input100" type="text" placeholder="Tài khoản " name="username"
-                                id="username">
-                            <span class="focus-input100"></span>
-                            <span class="symbol-input100">
+                <!--=====FORM INPUT TÀI KHOẢN VÀ PASSWORD======-->
+                <form action="">
+                    <div class="wrap-input100 validate-input">
+                        <input class="input100" type="text" placeholder="Tài khoản " name="username"
+                               id="username">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
                                 <i class='bx bx-user'></i>
                             </span>
-                        </div>
-                        <div class="wrap-input100 validate-input">
-                            <input autocomplete="off" class="input100" type="password" placeholder="Mật khẩu"
-                                name="password" id="password-field">
-                            <span toggle="#password-field" class="bx fa-fw bx-hide field-icon click-eye"></span>
-                            <span class="focus-input100"></span>
-                            <span class="symbol-input100">
+                    </div>
+                    <div class="wrap-input100 validate-input">
+                        <input autocomplete="off" class="input100" type="password" placeholder="Mật khẩu"
+                               name="password" id="password-field">
+                        <span toggle="#password-field" class="bx fa-fw bx-hide field-icon click-eye"></span>
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
                                 <i class='bx bx-key'></i>
                             </span>
-                        </div>
+                    </div>
 
-                        <!--=====ĐĂNG NHẬP======-->
-                        <div class="container-login100-form-btn">
-                            <input type="submit" value="Đăng nhập" id="submit" onclick="validate()" />
-                        </div>
-                        <!--=====LINK TÌM MẬT KHẨU======-->
-                        <div class="text-right p-t-12">
-                            <a class="txt2" th:href="@{/dangki}">
-                                Đăng kí
-                            </a>
-                        </div>
-                    </form>
-                    <!--=====FOOTER======-->
-                    <div class="text-center p-t-70 txt2">
-                        Phần mềm quản lý bán hàng <i class="far fa-copyright" aria-hidden="true"></i>
-                        <script type="text/javascript">document.write(new Date().getFullYear());</script> 
+                    <!--=====ĐĂNG NHẬP======-->
+                    <div class="container-login100-form-btn">
+                        <input type="submit" value="Đăng nhập" id="submit" onclick="validate()"/>
+                    </div>
+
+                    <h4><a th:href="@{/oauth2/authorization/facebook}">Login with Facebook</a></h4>
+                    <h4><a th:href="@{/oauth2/authorization/google}">Login with Google</a></h4>
+                    <!--=====LINK TÌM MẬT KHẨU======-->
+                    <div class="text-right p-t-12">
+                        <a class="txt2" th:href="@{/dangki}">
+                            Đăng kí
+                        </a>
                     </div>
                 </form>
-            </div>
+                <!--=====FOOTER======-->
+                <div class="text-center p-t-70 txt2">
+                    Phần mềm quản lý bán hàng <i class="far fa-copyright" aria-hidden="true"></i>
+                    <script type="text/javascript">document.write(new Date().getFullYear());</script>
+                </div>
+            </form>
         </div>
     </div>
-    <!--Javascript-->
-    <script th:src="@{/loginmem/js/main.js}"></script>
-    <script src="https://unpkg.com/boxicons@latest/dist/boxicons.js"></script>
-    <script th:src="@{/loginmem/vendor/jquery/jquery-3.2.1.min.js}"></script>
-    <script th:src="@{/loginmem/vendor/bootstrap/js/popper.js}"></script>
-    <script th:src="@{/loginmem/vendor/bootstrap/js/bootstrap.min.js}"></script>
-    <script th:src="@{/loginmem/vendor/select2/select2.min.js}"></script>
-    <script type="text/javascript">
-        //show - hide mật khẩu
-        function myFunction() {
-            var x = document.getElementById("myInput");
-            if (x.type === "password") {
-                x.type = "text"
-            } else {
-                x.type = "password";
-            }
+</div>
+<!--Javascript-->
+<script th:src="@{/loginmem/js/main.js}"></script>
+<script src="https://unpkg.com/boxicons@latest/dist/boxicons.js"></script>
+<script th:src="@{/loginmem/vendor/jquery/jquery-3.2.1.min.js}"></script>
+<script th:src="@{/loginmem/vendor/bootstrap/js/popper.js}"></script>
+<script th:src="@{/loginmem/vendor/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/loginmem/vendor/select2/select2.min.js}"></script>
+<script type="text/javascript">
+    //show - hide mật khẩu
+    function myFunction() {
+        var x = document.getElementById("myInput");
+        if (x.type === "password") {
+            x.type = "text"
+        } else {
+            x.type = "password";
         }
-        $(".click-eye").click(function () {
-            $(this).toggleClass("bx-show bx-hide");
-            var input = $($(this).attr("toggle"));
-            if (input.attr("type") == "password") {
-                input.attr("type", "text");
-            } else {
-                input.attr("type", "password");
-            }
-        });
-    </script>
+    }
+
+    $(".click-eye").click(function () {
+        $(this).toggleClass("bx-show bx-hide");
+        var input = $($(this).attr("toggle"));
+        if (input.attr("type") == "password") {
+            input.attr("type", "text");
+        } else {
+            input.attr("type", "password");
+        }
+    });
+</script>
 </body>
 
 </html>

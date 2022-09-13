@@ -1,6 +1,7 @@
 package quiet.com.ShopQA.Entity;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 
 import javax.persistence.Column;
@@ -29,4 +30,7 @@ public class DiscountEntity implements Serializable {/**
 	
 	@Column(name = "discount")
 	private Long discount;
+
+	@Column(name = "daycreate")
+	private LocalDateTime dateCreate;
 }

@@ -21,4 +21,6 @@ public class BillDTO {
 	private String pay;
 
 	private List<BillProductDTO> billProductDTOs;
+
+	private DiscountDTO discountDTO;
 }

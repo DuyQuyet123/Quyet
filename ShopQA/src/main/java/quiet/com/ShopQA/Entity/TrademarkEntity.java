@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Data;
+import org.hibernate.annotations.Type;
 
 @Data
 @Entity
@@ -25,4 +26,8 @@ public class TrademarkEntity implements Serializable {
 	
 	@Column(name = "name")
 	private String name;
+
+//	@Type(type = "quiet.com.ShopQA.config.jsonb.usertype.JsonbObjType",
+//			parameters = {@org.hibernate.annotations.Parameter(name = "className", value = "quiet.com.ShopQA.DTO.TranslationDto")})
+//	private Object translation;
 }

@@ -5,11 +5,13 @@ import java.util.List;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 
 import quiet.com.ShopQA.Entity.UserEntity;
+import quiet.com.ShopQA.enums.ProviderType;
 
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
 	@Query("select u from UserEntity u where u.username = :username")
@@ -24,4 +26,6 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 	@Query("select u from UserEntity u order by u.id DESC")
 	List<UserEntity> search3(Pageable pageable);
 
+	@Query("select u from UserEntity u where u.username = :username and u.email = :email")
+	UserEntity searchUser(@Param("username") String username, @Param("email") String email);
 }

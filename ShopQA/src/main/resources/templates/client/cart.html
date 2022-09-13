@@ -2,200 +2,203 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<!-- Favicon -->
-<link rel="shortcut icon" th:href="@{/client/./images/favicon.ico}"
-	type="image/x-icon">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- Favicon -->
+    <link rel="shortcut icon" th:href="@{/client/./images/favicon.ico}"
+          type="image/x-icon">
 
-<!-- Box icons -->
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
+    <!-- Box icons -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"/>
 
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-	crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
 
-<!-- Custom StyleSheet -->
-<link rel="stylesheet" th:href="@{/client/./css/styles.css}" />
-<title>Your Cart</title>
+    <!-- Custom StyleSheet -->
+    <link rel="stylesheet" th:href="@{/client/./css/styles.css}"/>
+    <title>Your Cart</title>
 </head>
 
 <body>
-	<!-- Navigation -->
-	<nav class="nav">
-		<div class="navigation container">
-			<div class="logo">
-				<h1>Shop QA</h1>
-			</div>
+<!-- Navigation -->
+<nav class="nav">
+    <div class="navigation container">
+        <div class="logo">
+            <h1>DQH STORE</h1>
+        </div>
 
-			<div class="menu">
-				<div class="top-nav">
-					<div class="logo">
-						<h1>Shop QA</h1>
-					</div>
-					<div class="close">
-						<i class="bx bx-x"></i>
-					</div>
-				</div>
+        <div class="menu">
+            <div class="top-nav">
+                <div class="logo">
+                    <h1>DQH STORE</h1>
+                </div>
+                <div class="close">
+                    <i class="bx bx-x"></i>
+                </div>
+            </div>
 
-				<ul class="nav-list">
-					<li class="nav-item"><a th:href="@{/home}" class="nav-link">Home</a>
-					</li>
-					<li class="nav-item"><a th:href="@{/products}"
-						class="nav-link">Products</a></li>
-					<li class="nav-item"><a th:href="@{/member/bills}"
-						class="nav-link scroll-link">Order History</a></li>
-					<li class="nav-item"><a href="#contact" class="nav-link">Contact</a>
-					</li>
-					<li class="nav-item"><a href="#contact" class="nav-link">Account</a>
-					</li>
-					<li class="nav-item"><a
-						th:href="@{/member/favoriteProduct/search}"
-						class="nav-link scroll-link"><i class="bx bx-heart"
-							style="font-size: larger;"></i></a></li>
-					<li class="nav-item"><a th:href="@{/cart}"
-						class="nav-link icon"><i class="bx bx-shopping-bag"></i></a></li>
-				</ul>
-			</div>
+            <ul class="nav-list">
+                <li class="nav-item"><a th:href="@{/home}" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item"><a th:href="@{/products}"
+                                        class="nav-link">Products</a></li>
+                <li class="nav-item"><a th:href="@{/member/bills}"
+                                        class="nav-link scroll-link">Order History</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link">Contact</a>
+                </li>
+                <li class="nav-item"><a href="#contact" class="nav-link">Account</a>
+                </li>
+                <li class="nav-item"><a
+                        th:href="@{/member/favoriteProduct/search}"
+                        class="nav-link scroll-link"><i class="bx bx-heart"
+                                                        style="font-size: larger;"></i></a></li>
+                <li class="nav-item"><a th:href="@{/cart}"
+                                        class="nav-link icon"><i class="bx bx-shopping-bag"></i></a></li>
+            </ul>
+        </div>
 
-			<a href="cart.html" class="cart-icon"> <i
-				class="bx bx-shopping-bag"></i>
-			</a>
+        <a href="cart.html" class="cart-icon"> <i
+                class="bx bx-shopping-bag"></i>
+        </a>
 
-			<div class="hamburger">
-				<i class="bx bx-menu"></i>
-			</div>
-		</div>
-	</nav>
+        <div class="hamburger">
+            <i class="bx bx-menu"></i>
+        </div>
+    </div>
+</nav>
 
-	<!-- Cart Items -->
-	<div class="container-md cart">
+<!-- Cart Items -->
+<div class="container-md cart">
 
-		<table border="1px solid blink">
-			<tr>
-				<th>Sản phẩm</th>
-				<th>Số lượng</th>
-				<th>Tổng giá($)</th>
-				<th>Chức năng</th>
-			</tr>
-			<div th:each="entry: ${session.cart}">
-			<form th:action="@{/update-cart}" method="get">
-				<tr>
-					<!--  -->
-					<td>
-						
-						<input type="hidden" name="id" th:value="${entry.key}">
-							<div class="cart-info">
-								<img
-									th:src="@{'/download?filename='+${entry.value.productDTO.image}}"
-									alt="">
-								<div>
-									<p th:text=${entry.value.productDTO.name}></p>
-									<label>Giá:</label> <span
-										th:text="${entry.value.productDTO.price }"></span> <label>$</label>
-									<br /> <a th:href="@{'/remove-cart?id='+${entry.key}}">remove</a>
-								</div>
-							</div>
-						
-					</td>
-					<td><input style="border: none;"
-						th:text="${entry.value.quantity }" type="text" name="quantity"></td>
+    <table border="1px solid blink">
+        <tr>
+            <th>Sản phẩm</th>
+            <th>Số lượng</th>
+            <th>Tổng giá($)</th>
+            <th>Chức năng</th>
+        </tr>
+        <div th:each="entry: ${session.cart}">
+            <form th:action="@{/update-cart}" method="get">
+                <tr>
+                    <!--  -->
+                    <td><input type="hidden" name="id" th:value="${entry.key}">
+                        <div class="cart-info">
+                            <img
+                                    th:src="@{'/download?filename='+${entry.value.productDTO.image}}"
+                                    alt="">
+                            <div>
+                                <p th:text=${entry.value.productDTO.name}></p>
+                                <label>Giá:</label> <span
+                                    th:text="${entry.value.productDTO.price }"></span> <label>$</label>
+                                <br/> <a th:href="@{'/remove-cart?id='+${entry.key}}">remove</a>
+                            </div>
+                        </div>
+                    </td>
+                    <td><input style="border: none;"
+                               th:text="${entry.value.quantity }" type="text" name="quantity"></td>
 
-					<td th:text="${entry.value.quantity*entry.value.productDTO.price }"></td>
-					<td> <a th:href="@{'/remove-cart?id='+${entry.key}}" type="button" class="btn btn-danger">delete</a>|<button type="submit" class="btn btn-primary">update</button></td>
-				</tr>
-			</form>
-			</div>
+                    <td
+                            th:text="${entry.value.quantity*entry.value.productDTO.price }"></td>
+                    <td><a th:href="@{'/remove-cart?id='+${entry.key}}"
+                           type="button" class="btn btn-danger">delete</a>|
+                        <button type="submit" class="btn btn-primary">update</button>
+                    </td>
+                </tr>
+            </form>
+        </div>
 
-		</table>
-		<div class="total-price">
-			<table>
-				<tr>
-					<td>Subtotal</td>
-					<td th:text=${session.total}></td>
-				</tr>
-				<tr>
-					<td>discount</td>
-					<td>0%</td>
-				</tr>
-				<tr>
-					<td>Total</td>
-					<td th:text=${session.total}></td>
-				</tr>
-			</table>
-			<span><a th:href="@{/home}" role="button" class="checkout btn">Mua
-					tiếp</a></span> <span><a th:href="@{/member/add-bill}" role="button"
-				class="checkout btn">Thanh Toán</a></span>
+    </table>
+    <div class="total-price">
+        <table>
+            <tr>
+                <td>Subtotal</td>
+                <td th:text=${session.total}></td>
+            </tr>
+            <tr>
+                <td>discount</td>
+                <td>0%</td>
+            </tr>
+            <tr>
+                <td>Total</td>
+                <td th:text=${session.total}></td>
+            </tr>
+        </table>
+        <span><a th:href="@{/home}" role="button" class="checkout btn">Mua
+					tiếp</a></span>
+        <form th:action="@{/member/add-bill}">
+            <input id="nhap" placeholder="Nhập mã giảm giá..." type="text" name="discount" size="15px">
+            <span><button type="submit"
+                          class="checkout1 btn">Thanh Toán</button></span>
+        </form>
+    </div>
 
-		</div>
-
-	</div>
+</div>
 
 
-
-	<!-- Footer -->
-	<footer id="footer" class="section footer">
-		<div class="container">
-			<div class="footer-container">
-				<div class="footer-center">
-					<h3>EXTRAS</h3>
-					<a href="#">Brands</a> <a href="#">Gift Certificates</a> <a
-						href="#">Affiliate</a> <a href="#">Specials</a> <a href="#">Site
-						Map</a>
-				</div>
-				<div class="footer-center">
-					<h3>INFORMATION</h3>
-					<a href="#">About Us</a> <a href="#">Privacy Policy</a> <a href="#">Terms
-						& Conditions</a> <a href="#">Contact Us</a> <a href="#">Site Map</a>
-				</div>
-				<div class="footer-center">
-					<h3>MY ACCOUNT</h3>
-					<a href="#">My Account</a> <a href="#">Order History</a> <a
-						href="#">Wish List</a> <a href="#">Newsletter</a> <a href="#">Returns</a>
-				</div>
-				<div class="footer-center">
-					<h3>CONTACT US</h3>
-					<div>
+<!-- Footer -->
+<footer id="footer" class="section footer">
+    <div class="container">
+        <div class="footer-container">
+            <div class="footer-center">
+                <h3>EXTRAS</h3>
+                <a href="#">Brands</a> <a href="#">Gift Certificates</a> <a
+                    href="#">Affiliate</a> <a href="#">Specials</a> <a href="#">Site
+                Map</a>
+            </div>
+            <div class="footer-center">
+                <h3>INFORMATION</h3>
+                <a href="#">About Us</a> <a href="#">Privacy Policy</a> <a href="#">Terms
+                & Conditions</a> <a href="#">Contact Us</a> <a href="#">Site Map</a>
+            </div>
+            <div class="footer-center">
+                <h3>MY ACCOUNT</h3>
+                <a href="#">My Account</a> <a href="#">Order History</a> <a
+                    href="#">Wish List</a> <a href="#">Newsletter</a> <a href="#">Returns</a>
+            </div>
+            <div class="footer-center">
+                <h3>CONTACT US</h3>
+                <div>
 						<span> <i class="fas fa-map-marker-alt"></i>
 						</span> 42 Dream House, Dreammy street, 7131 Dreamville, USA
-					</div>
-					<div>
+                </div>
+                <div>
 						<span> <i class="far fa-envelope"></i>
 						</span> company@gmail.com
-					</div>
-					<div>
+                </div>
+                <div>
 						<span> <i class="fas fa-phone"></i>
 						</span> 456-456-4512
-					</div>
-					<div>
+                </div>
+                <div>
 						<span> <i class="far fa-paper-plane"></i>
 						</span> Dream City, USA
-					</div>
-				</div>
-			</div>
-		</div>
-		</div>
-	</footer>
-	<!-- End Footer -->
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</footer>
+<!-- End Footer -->
 
-	<!-- GSAP -->
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-		crossorigin="anonymous"></script>
-	<!-- Custom Script -->
-	<script th:src="@{/client/./js/index.js}"></script>
+<!-- GSAP -->
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<!-- Custom Script -->
+<script th:src="@{/client/./js/index.js}"></script>
 </body>
 
 </html>

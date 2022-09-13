@@ -1,9 +1,14 @@
 package quiet.com.ShopQA.Controler;
 
 import java.io.File;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -19,6 +24,7 @@ import quiet.com.ShopQA.DTO.CategoryDTO;
 import quiet.com.ShopQA.DTO.ProductDTO;
 import quiet.com.ShopQA.DTO.SizeDTO;
 import quiet.com.ShopQA.DTO.TrademarkDTO;
+import quiet.com.ShopQA.Export.ProductExcelExport;
 import quiet.com.ShopQA.Service.CategoryService;
 import quiet.com.ShopQA.Service.ProductService;
 import quiet.com.ShopQA.Service.SizeService;
@@ -122,6 +128,23 @@ public class ProductControler {
 		request.setAttribute("CategoryDTOs", listCategoryDTOs);
 		request.setAttribute("ProductDTOs", productDTOs);
 		return "admin/product/searchproduct";
+	}
+
+	@GetMapping("/admin/export/excel/product")
+	public void exportToExcel(HttpServletResponse response) throws IOException {
+		response.setContentType("application/octet-stream");
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+		String currentDateTime = dateFormatter.format(new Date());
+
+		String headerKey = "Content-Disposition";
+		String headerValue = "attachment; filename=product_" + currentDateTime + ".xlsx";
+		response.setHeader(headerKey, headerValue);
+
+		List<ProductDTO> productDTOs = productService.search();
+
+		ProductExcelExport excelExporter = new ProductExcelExport(productDTOs);
+
+		excelExporter.export(response);
 	}
 
 	// ManagerProduct

@@ -1,5 +1,6 @@
 package quiet.com.ShopQA.ServiceImpl;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +25,7 @@ public class DiscountServiceImpl implements DiscountService {
 		DiscountEntity discountEntity = new DiscountEntity();
 		discountEntity.setName(discountDTO.getName());
 		discountEntity.setDiscount(discountDTO.getDiscount());
+		discountEntity.setDateCreate(LocalDateTime.now());
 		discountRepository.save(discountEntity);
 	}
 
@@ -34,6 +36,7 @@ public class DiscountServiceImpl implements DiscountService {
 		if (discountEntity != null) {
 			discountEntity.setName(discountDTO.getName());
 			discountEntity.setDiscount(discountDTO.getDiscount());
+			discountEntity.setDateCreate(LocalDateTime.now());
 			discountRepository.save(discountEntity);
 		}
 	}
@@ -68,6 +71,7 @@ public class DiscountServiceImpl implements DiscountService {
 		discountDTO.setId(discountEntity.getId());
 		discountDTO.setName(discountEntity.getName());
 		discountDTO.setDiscount(discountEntity.getDiscount());
+		discountDTO.setDayCreate(discountEntity.getDateCreate());
 		return discountDTO;
 
 	}
