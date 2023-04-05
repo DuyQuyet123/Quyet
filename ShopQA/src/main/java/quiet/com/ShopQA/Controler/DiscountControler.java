@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import quiet.com.ShopQA.DTO.DiscountDTO;
-import quiet.com.ShopQA.Service.DiscountService;
+import quiet.com.ShopQA.service.DiscountService;
 
 @Controller
 public class DiscountControler {

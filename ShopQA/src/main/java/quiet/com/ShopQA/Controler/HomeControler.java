@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import quiet.com.ShopQA.DTO.BillDTO;
 import quiet.com.ShopQA.DTO.ProductDTO;
 import quiet.com.ShopQA.DTO.UserDTO;
-import quiet.com.ShopQA.Service.BillService;
-import quiet.com.ShopQA.Service.ProductService;
-import quiet.com.ShopQA.Service.UserService;
+import quiet.com.ShopQA.service.BillService;
+import quiet.com.ShopQA.service.ProductService;
+import quiet.com.ShopQA.service.UserService;
 
 @Controller
 public class HomeControler {

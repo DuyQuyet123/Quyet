@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import quiet.com.ShopQA.DTO.CommentDTO;
 import quiet.com.ShopQA.DTO.FavoriteProductDTO;
-import quiet.com.ShopQA.Service.CommentService;
-import quiet.com.ShopQA.Service.FavoriteProductService;
+import quiet.com.ShopQA.service.CommentService;
+import quiet.com.ShopQA.service.FavoriteProductService;
 
 import java.util.List;
 

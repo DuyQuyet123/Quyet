@@ -20,8 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import quiet.com.ShopQA.DTO.UserDTO;
 import quiet.com.ShopQA.Export.UserExcelExport;
-import quiet.com.ShopQA.Service.UserService;
-import quiet.com.ShopQA.ServiceImpl.UserServiceImpl;
+import quiet.com.ShopQA.service.UserService;
 
 import javax.servlet.http.HttpServletResponse;
 

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import quiet.com.ShopQA.Repostory.UserRepository;
-import quiet.com.ShopQA.Service.UserService;
+import quiet.com.ShopQA.service.UserService;
 
 @Controller
 public class LoginControler {

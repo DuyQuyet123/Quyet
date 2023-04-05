@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import quiet.com.ShopQA.DTO.CategoryDTO;
-import quiet.com.ShopQA.Service.CategoryService;
+import quiet.com.ShopQA.service.CategoryService;
 
 
 @Controller

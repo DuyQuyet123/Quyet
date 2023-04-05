@@ -3,7 +3,7 @@ package quiet.com.ShopQA.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import quiet.com.ShopQA.DTO.UserDTO;
-import quiet.com.ShopQA.Service.UserService;
+import quiet.com.ShopQA.service.UserService;
 
 import java.util.List;
 

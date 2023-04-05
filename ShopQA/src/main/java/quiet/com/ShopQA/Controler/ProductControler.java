@@ -25,10 +25,10 @@ import quiet.com.ShopQA.DTO.ProductDTO;
 import quiet.com.ShopQA.DTO.SizeDTO;
 import quiet.com.ShopQA.DTO.TrademarkDTO;
 import quiet.com.ShopQA.Export.ProductExcelExport;
-import quiet.com.ShopQA.Service.CategoryService;
-import quiet.com.ShopQA.Service.ProductService;
-import quiet.com.ShopQA.Service.SizeService;
-import quiet.com.ShopQA.Service.TrademarkService;
+import quiet.com.ShopQA.service.CategoryService;
+import quiet.com.ShopQA.service.ProductService;
+import quiet.com.ShopQA.service.SizeService;
+import quiet.com.ShopQA.service.TrademarkService;
 
 @Controller
 public class ProductControler {

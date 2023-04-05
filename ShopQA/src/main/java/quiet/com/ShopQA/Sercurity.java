@@ -14,9 +14,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import quiet.com.ShopQA.ServiceImpl.CustomOAuth2User;
-import quiet.com.ShopQA.ServiceImpl.CustomOAuth2UserService;
-import quiet.com.ShopQA.ServiceImpl.UserOAuth2Service;
+import quiet.com.ShopQA.service.impl.CustomOAuth2User;
+import quiet.com.ShopQA.service.impl.CustomOAuth2UserService;
+import quiet.com.ShopQA.service.impl.UserOAuth2Service;
 import quiet.com.ShopQA.sercurity.JwtAuthenticationFilter;
 
 import javax.servlet.ServletException;

@@ -9,13 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import quiet.com.ShopQA.DTO.UserPrincipal;
 
-import quiet.com.ShopQA.Service.BillProductService;
-import quiet.com.ShopQA.Service.BillService;
-import quiet.com.ShopQA.Service.CommentService;
-import quiet.com.ShopQA.Service.EmailService;
-import quiet.com.ShopQA.Service.FavoriteProductService;
-import quiet.com.ShopQA.Service.ProductService;
-import quiet.com.ShopQA.Service.ReviewService;
+import quiet.com.ShopQA.service.BillProductService;
+import quiet.com.ShopQA.service.BillService;
+import quiet.com.ShopQA.service.CommentService;
+import quiet.com.ShopQA.service.EmailService;
+import quiet.com.ShopQA.service.FavoriteProductService;
+import quiet.com.ShopQA.service.ProductService;
+import quiet.com.ShopQA.service.ReviewService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;

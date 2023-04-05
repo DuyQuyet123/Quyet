@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import quiet.com.ShopQA.DTO.CategoryDTO;
 import quiet.com.ShopQA.DTO.DataGetInfo;
-import quiet.com.ShopQA.Service.CategoryService;
-import quiet.com.ShopQA.ServiceImpl.factory.GetDataInfoFactory;
-import quiet.com.ShopQA.ServiceImpl.factory.ResponseFactory;
+import quiet.com.ShopQA.service.CategoryService;
+import quiet.com.ShopQA.service.impl.factory.GetDataInfoFactory;
+import quiet.com.ShopQA.service.impl.factory.ResponseFactory;
 
 import java.util.List;
 

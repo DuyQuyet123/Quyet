@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import quiet.com.ShopQA.DTO.ProductDTO;
-import quiet.com.ShopQA.Service.ProductService;
+import quiet.com.ShopQA.service.ProductService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;

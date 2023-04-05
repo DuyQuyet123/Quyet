@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import quiet.com.ShopQA.DTO.TrademarkDTO;
 import quiet.com.ShopQA.Export.TrademarkExcelExport;
-import quiet.com.ShopQA.Service.TrademarkService;
+import quiet.com.ShopQA.service.TrademarkService;
 
 import javax.servlet.http.HttpServletResponse;
 

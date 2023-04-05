@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import quiet.com.ShopQA.DTO.BillDTO;
 import quiet.com.ShopQA.DTO.BillProductDTO;
 import quiet.com.ShopQA.Export.BillExcelExport;
-import quiet.com.ShopQA.Service.BillProductService;
-import quiet.com.ShopQA.Service.BillService;
+import quiet.com.ShopQA.service.BillProductService;
+import quiet.com.ShopQA.service.BillService;
 
 @Controller
 public class BillControler {

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import quiet.com.ShopQA.DTO.SizeDTO;
-import quiet.com.ShopQA.Service.SizeService;
+import quiet.com.ShopQA.service.SizeService;
 
 @Controller
 public class SizeControler {
